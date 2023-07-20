@@ -22,6 +22,18 @@ Just an analogue of md5. Output is made of all the new internal
 state numbers, not just the last one. Pretty much only difference
 is that. Return is a string.
 
+### gcd(a, b)
+
+Returns gcd of arguments
+
+### gcdExtended(a, b)
+
+Returns gcd, x, y where x and y are coefficients of the equation:
+
+`ax + by = gcd(a, b)`
+
+This is used to implement a faster key generation in RSA.
+
 ### primeByOrder(int)
 
 Takes an integer as the order, then returns the prime in the order.
@@ -44,7 +56,7 @@ than 2, returns false.
 Creates a tuple of public and private key and returns it. Public key
 is itself a tuple. p and q as primes can be given. _smallest_ determines 
 the e. If true, which is the default, e is the smallest number possible. 
-If false, e is choosen randomly within the list. If randomly choosen, 
+If false, e is chosen randomly within the list. If randomly choosen, 
 private key generation takes a lot of time, therefore the default is true.
 
 If given p and q are not primes, raises an ArgError.
@@ -59,3 +71,10 @@ character.
 
 Takes in the keys and the encrypted message, then returns the decrypted message.
 Return type is string this time.
+
+Rarely throws a ValueError exception at
+
+`result += chr(temp)`
+
+Whilst the reason is yet unknown to me i suspect that it is because of the 
+information loss during multiplications of large numbers.

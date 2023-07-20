@@ -107,6 +107,23 @@ class ciphertools:
 
         return str(J).replace("0x", "") + str(K).replace("0x", "") + str(L).replace("0x", "") + str(M).replace("0x", "")
 
+    def gcd(a: int, b: int):
+        if a == 0:
+            return b
+        if a > b:
+            return ciphertools.gcd(a%b, b)
+        return ciphertools.gcd(b%a, a)
+
+    def gcdExtended(a: int, b: int):
+        if not b > a:
+            return ciphertools.gcdExtended(b, a)
+        if a == 0:
+            return b, 0, 1
+        gcd, s1, t1 = ciphertools.gcdExtended(b%a, a)
+
+        s, t = (t1 - b//a * s1, s1)
+        return gcd, s, t
+
     def primeByOrder(order: int = secrets.randbits(8) + 1):
         if order < 1:
             raise RangeError
@@ -131,6 +148,7 @@ class ciphertools:
             temp = ciphertools.primeByRange(2, begin)
         else:
             temp = [2]
+        l = len(temp)
         a = begin
         while begin < end:
             for k in temp:
@@ -142,7 +160,7 @@ class ciphertools:
             begin += 1
         if a == end:
             return temp
-        return temp
+        return temp[l:]
 
     def isPrime(value: int):
         if value < 2:
@@ -154,14 +172,16 @@ class ciphertools:
 
     def keygenRsa(p: int = 0, q: int = 0, smallest: bool = True):
         if p == 0 and q == 0:
-            p = ciphertools.primeByRange(1000, 3000)
+            p = ciphertools.primeByRange(3000, 5000)
             p = p[secrets.randbits(32) % len(p)]
-            q = ciphertools.primeByRange(1000, 3000)
+            q = ciphertools.primeByRange(3000, 5000)
             q = q[secrets.randbits(32) % len(q)]
 
         if not (ciphertools.isPrime(p) and ciphertools.isPrime(q)):
-            print(p, q)
             raise ArgError(0)
+        #phi = int(((p - 1) * (q - 1)) / ciphertools.gcd(p - 1, q - 1))
+        #using this sometimes results in a ValueError in decryptor, probably because of the division here
+        #so i am not implementing it
         phi = (p - 1) * (q - 1)
         n = p * q
         e_list = list()
@@ -175,11 +195,14 @@ class ciphertools:
             e = e_list[secrets.randbits(32) % len(e_list)]
         del e_list
 
-        d = 2
-        while True:
-            if (d*e) % phi == 1:
-                break
-            d += 1
+        gcd, x, y = ciphertools.gcdExtended(e, phi)
+        if (x * e) % phi == 1:
+            d = x
+        else:
+            d = y
+        while d < 0:
+            d += phi
+
         return ((n, e), d)
 
     def encryptorRsa(public: tuple, message: str):
