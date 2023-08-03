@@ -200,7 +200,7 @@ class ciphertools:
             d = x
         else:
             d = y
-        while d < 0:
+        while d < 2:
             d += phi
 
         return ((n, e), d)
@@ -225,5 +225,54 @@ class ciphertools:
                 temp *= value
                 temp = temp % public[0]
             result += chr(temp)
+        return result
+
+    def encryptorRsa2(public: tuple, message: str):
+        # it is beneficial to put the message in r"" form
+        # otherwise characters that have no visualisation
+        # will break the process since they are unrecognized
+        result = list()
+        groups = list()
+        temp = list(message)
+
+        if len(temp) % 2 == 0:
+            for k in range(0, len(temp), 2):
+                groups.append(int(str(ord(temp[k])) + str(ord(temp[k + 1]))))
+        else:
+            for k in range(0, len(temp), 2):
+                if k == len(temp) - 1:
+                    groups.append(int(str(ord(temp[-1]))))
+                    break
+                groups.append(int(str(ord(temp[k])) + str(ord(temp[k + 1]))))
+        del temp
+
+        for k in groups:
+            temp = 1
+            for l in range(public[1]):
+                temp = temp % public[0]
+                temp *= k
+            temp = temp % public[0]
+            result.append(temp)
+        return tuple(result)
+
+    def decryptorRsa2(public: tuple, private: int, message: tuple):
+        result = ""
+        result2 = list()
+        for k in message:
+            temp = 1
+            for l in range(private):
+                temp = temp % public[0]
+                temp *= k
+            temp = temp % public[0]
+            result2.append(str(temp))
+        for k in result2:
+            value = k
+            while int(value) >= 128:
+                value = value[:-1]
+            result += chr(int(value))
+            if len(k) > 3:
+                value2 = k[len(value):]
+                result += chr(int(value2))
+
         return result
 

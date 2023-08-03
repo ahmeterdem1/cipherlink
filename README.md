@@ -72,9 +72,41 @@ character.
 Takes in the keys and the encrypted message, then returns the decrypted message.
 Return type is string this time.
 
-Rarely throws a ValueError exception at
+### encryptorRsa2(public, message)
 
-`result += chr(temp)`
+Same as the original one. Only difference is that, this works by grouping
+characters by 2, appending their ascii values, using the resultant integer.
+With this method, this function is not an overcomplicated caesar cipher 
+anymore.
 
-Whilst the reason is yet unknown to me i suspect that it is because of the 
-information loss during multiplications of large numbers.
+### decryptorRsa2(public, private, message)
+
+Decrypts RSA messages grouped in 2.
+
+## Known issues
+
+### Random Exceptions and Errors
+
+Both decryptor functions rarely raise exceptions or result in an incorrect
+message. One of the reasons for that was, generated private key could be 1
+sometimes. This makes the for loop exit immediately. So no decryption occurs.
+This is solved now. The only remaining reason known for this issue is the
+information loss during multiplications of large numbers. Frequency of this
+issue happening is measured to be around %4 with pypy3 as compiler.
+
+Beware that every time this issue happens, indeed no decryption occurs.
+You can see this with debugging, for some reason the encrypted message
+is passed as the result in the decryptor despite the private key being
+larger than 2. This may be due to some mathematical problem in our method
+of private key calculation. But %4 is small enough to be practical.
+
+### Algorithm is annoyingly slow
+
+Algorithm is not the only thing that is slow here. CPython is the real slow
+thing in here. Our recommendation is to use pypy as the compiler. Pypy is 
+measured to be around 10 to 20 times faster than CPython during keygen,
+encryption and decryption combined. This is probably due to the optimizations
+on loops in pypy. CPython takes its time during the for and while loops of
+said operations. We have to sacrifice the speed here with that loops because
+otherwise we would have to do operations on really large numbers. That will
+result in the above said errors. Just using C/C++ is still an option.
