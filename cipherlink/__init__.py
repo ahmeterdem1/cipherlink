@@ -10,10 +10,10 @@ class ArgError(Exception):
         if control == 0:
             super().__init__("Args must be primes")
 
-class ciphertools:
+class cipherlink:
 
     def __init__(self):
-        print(dir(ciphertools))
+        print(dir(cipherlink))
 
     def hash(text: str):
         temp = ""
@@ -111,15 +111,15 @@ class ciphertools:
         if a == 0:
             return b
         if a > b:
-            return ciphertools.gcd(a%b, b)
-        return ciphertools.gcd(b%a, a)
+            return cipherlink.gcd(a%b, b)
+        return cipherlink.gcd(b%a, a)
 
     def gcdExtended(a: int, b: int):
         if not b > a:
-            return ciphertools.gcdExtended(b, a)
+            return cipherlink.gcdExtended(b, a)
         if a == 0:
             return b, 0, 1
-        gcd, s1, t1 = ciphertools.gcdExtended(b%a, a)
+        gcd, s1, t1 = cipherlink.gcdExtended(b%a, a)
 
         s, t = (t1 - b//a * s1, s1)
         return gcd, s, t
@@ -145,7 +145,7 @@ class ciphertools:
         if begin > end:
             raise RangeError
         if begin > 2:
-            temp = ciphertools.primeByRange(2, begin)
+            temp = cipherlink.primeByRange(2, begin)
         else:
             temp = [2]
         l = len(temp)
@@ -172,14 +172,14 @@ class ciphertools:
 
     def keygenRsa(p: int = 0, q: int = 0, smallest: bool = True):
         if p == 0 and q == 0:
-            p = ciphertools.primeByRange(3000, 5000)
+            p = cipherlink.primeByRange(3000, 5000)
             p = p[secrets.randbits(32) % len(p)]
-            q = ciphertools.primeByRange(3000, 5000)
+            q = cipherlink.primeByRange(3000, 5000)
             q = q[secrets.randbits(32) % len(q)]
 
-        if not (ciphertools.isPrime(p) and ciphertools.isPrime(q)):
+        if not (cipherlink.isPrime(p) and cipherlink.isPrime(q)):
             raise ArgError(0)
-        #phi = int(((p - 1) * (q - 1)) / ciphertools.gcd(p - 1, q - 1))
+        #phi = int(((p - 1) * (q - 1)) / cipherlink.gcd(p - 1, q - 1))
         #using this sometimes results in a ValueError in decryptor, probably because of the division here
         #so i am not implementing it
         phi = (p - 1) * (q - 1)
@@ -195,7 +195,7 @@ class ciphertools:
             e = e_list[secrets.randbits(32) % len(e_list)]
         del e_list
 
-        gcd, x, y = ciphertools.gcdExtended(e, phi)
+        gcd, x, y = cipherlink.gcdExtended(e, phi)
         if (x * e) % phi == 1:
             d = x
         else:

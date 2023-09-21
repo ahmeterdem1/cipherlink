@@ -4,15 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3d49164-a7c9-4ff3-8889-29367bc329de" name="Changes" comment="A faster key generation implemented with extended euclidian.">
+    <list default="true" id="b3d49164-a7c9-4ff3-8889-29367bc329de" name="Changes" comment="New encryption-decyption structure added">
+      <change afterPath="$PROJECT_DIR$/LICENCE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ciphertools/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ciphertools.py" beforeDir="false" afterPath="$PROJECT_DIR$/ciphertools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ciphertools.py" beforeDir="false" afterPath="$PROJECT_DIR$/ciphertools/ciphertools.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,6 +48,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ciphertools" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="ciphertools" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="ciphertools" />
@@ -53,7 +67,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ciphertools.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ciphertools/ciphertools.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -76,7 +90,13 @@
       <workItem from="1689869025869" duration="7543000" />
       <workItem from="1689888895477" duration="2911000" />
       <workItem from="1690028155246" duration="245000" />
-      <workItem from="1691082589518" duration="2441000" />
+      <workItem from="1691082589518" duration="3602000" />
+      <workItem from="1695230300101" duration="2492000" />
+      <workItem from="1695240165659" duration="2687000" />
+      <workItem from="1695316994015" duration="82000" />
+      <workItem from="1695317079399" duration="87000" />
+      <workItem from="1695317185714" duration="8000" />
+      <workItem from="1695317204997" duration="532000" />
     </task>
     <task id="LOCAL-00001" summary="First version added.">
       <created>1689876461577</created>
@@ -92,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689891214558</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="New encryption-decyption structure added">
+      <created>1691085977086</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1691085977086</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,10 +139,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First version added." />
     <MESSAGE value="A faster key generation implemented with extended euclidian." />
-    <option name="LAST_COMMIT_MESSAGE" value="A faster key generation implemented with extended euclidian." />
+    <MESSAGE value="New encryption-decyption structure added" />
+    <option name="LAST_COMMIT_MESSAGE" value="New encryption-decyption structure added" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ciphertools$main.coverage" NAME="ciphertools Coverage Results" MODIFIED="1689875748631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ciphertools$ciphertools.coverage" NAME="ciphertools Coverage Results" MODIFIED="1691084554893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ciphertools$ciphertools.coverage" NAME="ciphertools Coverage Results" MODIFIED="1695242740127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
